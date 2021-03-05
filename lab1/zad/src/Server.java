@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -89,7 +90,7 @@ public class Server {
     private static void parseMessage(List<ServerClient> users, ServerClient client, Pattern pattern)
             throws IOException {
         String msg = client.in.readLine();
-        System.out.println("Sent by TCP: " + msg);
+        System.out.println(client.socket.getPort());
         if(msg.equals("close")){
             client.close();
             users.remove(client);
@@ -162,8 +163,8 @@ public class Server {
 
         public ServerClient(Socket clientSocket) throws IOException {
             socket = clientSocket;
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new PrintWriter(clientSocket.getOutputStream(), true, StandardCharsets.UTF_8);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
         }
 
         public void setLogin(String userLogin){

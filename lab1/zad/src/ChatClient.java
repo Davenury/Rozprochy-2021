@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -10,6 +11,8 @@ public class ChatClient {
 
     static int port = 12345;
     static String name = "localhost";
+    static String multicastName = "230.0.0.0";
+    static int multicastPort = 4446;
 
     public static void main(String[] args) throws IOException {
         SocketPacket socketPacket = establishConnection();
@@ -19,8 +22,8 @@ public class ChatClient {
         }
         Socket socket = socketPacket.tcp;
         DatagramSocket udpSocket = socketPacket.udp;
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true, StandardCharsets.UTF_8);
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 
         Thread thread = new Thread(() -> {
             try {
@@ -49,6 +52,24 @@ public class ChatClient {
         });
         udpThread.start();
 
+        Thread multicastThread = new Thread(() -> {
+            try {
+                byte[] buffer = new byte[1024];
+                MulticastSocket multicastSocket = new MulticastSocket(multicastPort);
+                InetAddress group = InetAddress.getByName(multicastName);
+                multicastSocket.joinGroup(group);
+                while(!Thread.interrupted()){
+                    DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+                    multicastSocket.receive(packet);
+                    String msg = new String(packet.getData(), 0, packet.getLength());
+                    System.out.println(msg);
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        });
+        multicastThread.start();
+
         while(true){
             String command = getCommand();
             int code = parseCommand(command, socket, out, in, thread, udpSocket, udpThread);
@@ -63,6 +84,16 @@ public class ChatClient {
         DatagramPacket sendPacket = new DatagramPacket(sendBuffer,
                 sendBuffer.length, InetAddress.getByName(name), port);
         socket.send(sendPacket);
+    }
+
+    private static void sendByMulticast(String msg) throws IOException {
+        byte[] buffer = msg.getBytes();
+        DatagramSocket socket = new DatagramSocket();
+        InetAddress group = InetAddress.getByName(multicastName);
+
+        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, group, multicastPort);
+        socket.send(packet);
+        socket.close();
     }
 
     private static SocketPacket establishConnection(){
@@ -105,13 +136,16 @@ public class ChatClient {
                                     Thread thread, DatagramSocket udpSocket, Thread udpThread) throws IOException {
         command = command.toLowerCase();
         Pattern startsWithU = Pattern.compile("^u");
+        Pattern startsWithM = Pattern.compile("^m ");
         if(command.equals("logout")){
             closeConnection(socket, thread, out, udpSocket, udpThread);
             return -1;
         } else if(startsWithU.matcher(command).find()){
             sendByUDP(udpSocket, command.substring(2));
-        } else{
-            out.println(command);
+        } else if(startsWithM.matcher(command).find()) {
+            sendByMulticast(command.substring(2));
+        }else{
+                out.println(command);
         }
         return 0;
     }
