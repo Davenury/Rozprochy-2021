@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.*;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -50,7 +49,7 @@ public class Server {
                     } else{
                         for(UDPClient udpUser : users){
                             if(!udpUser.equals(user))
-                                user.sendMessage(msg, udpSocket);
+                                udpUser.sendMessage(msg, udpSocket);
                         }
                     }
                 }
