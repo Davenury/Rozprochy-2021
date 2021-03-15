@@ -1,0 +1,7 @@
+Aplikację należy uruchomić poprzez skompilowanie plików javowych. Potrzebne polecenia:
+javac Server.java
+javac ChatClient.java
+
+Następnie należy uruchomić Server oraz Clientów. Polecenia:
+java Server
+java ChatClient (w nowych terminalach powtarzamy tyle razy, ile klientów chcemy)
