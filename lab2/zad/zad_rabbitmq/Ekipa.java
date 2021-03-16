@@ -7,16 +7,20 @@ import java.util.*;
 
 public class Ekipa {
 
-    Connection connection;
-    Channel channel;
-    String name;
-    String OUT_QUEUE = "OD_EKIPY";
-    String IN_QUEUE = "OD_DOSTAWCY";
-    String order;
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private Connection connection;
+    private Channel channel;
+    private String name;
+    private String OUT_QUEUE = "OD_EKIPY";
+    private String IN_QUEUE = "OD_DOSTAWCY_DO_";
+    private String order;
+    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private int numberOfSuppliers;
+    private int counter = 0;
 
-    public Ekipa(String name) throws Exception{
+    public Ekipa(String name, int numberOfSuppliers) throws Exception{
         this.name = name;
+        IN_QUEUE += this.name;
+        this.numberOfSuppliers = numberOfSuppliers;
         this.createConsumerAndListen();
         this.makeOrders();
     }
@@ -30,9 +34,8 @@ public class Ekipa {
 
     private void setUpQueues() throws Exception{
         this.setUpChannel();
-        String QUEUE_NAME = "OD_EKIPY";
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        channel.queueDeclare("OD_DOSTAWCY", false, false, false, null);
+        channel.queueDeclare(OUT_QUEUE, false, false, false, null);
+        channel.queueDeclare(IN_QUEUE, false, false, false, null);
     }
 
     private void createConsumerAndListen() throws Exception{
@@ -44,13 +47,18 @@ public class Ekipa {
                 String[] splitted = message.split(" ");
                 if(!splitted[0].equals("ACK")){
                     try {
-                        sendOrder();
+                        if(counter < numberOfSuppliers)
+                            sendOrder();
+                        else{
+                            System.out.println("Nobody has it!");
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
                 else{
                     System.out.println(message);
+                    counter = 0;
                 }
             }
         };
@@ -66,6 +74,7 @@ public class Ekipa {
         String message = this.name + " " + order;
         channel.basicPublish("", OUT_QUEUE, null, message.getBytes());
         System.out.println("Sent: " + message);
+        this.counter++;
     }
 
     private void makeOrders() throws Exception{

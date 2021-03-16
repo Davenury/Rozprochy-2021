@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 public class DostawcaMain {
 
     static String IN_QUEUE_NAME = "OD_EKIPY";
-    static String OUT_QUEUE = "OD_DOSTAWCY";
+    static String OUT_QUEUE = "OD_DOSTAWCY_DO_";
 
     public static void main(String[] argv) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

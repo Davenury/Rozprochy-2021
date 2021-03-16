@@ -10,6 +10,8 @@ public class EkipaMain {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Input name of this equipe: ");
         String name = br.readLine();
-        Ekipa equipe = new Ekipa(name);
+        System.out.println("Input number of possible suppliers");
+        String line = br.readLine();
+        Ekipa equipe = new Ekipa(name, Integer.parseInt(line));
     }
 }

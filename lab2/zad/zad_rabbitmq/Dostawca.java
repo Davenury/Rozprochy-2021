@@ -6,12 +6,12 @@ import java.io.InputStreamReader;
 import java.util.*;
 public class Dostawca {
 
-    String IN_QUEUE_NAME;
-    String OUT_QUEUE_NAME;
-    Connection connection;
-    Channel channel;
-    String name;
-    List<String> items = new ArrayList<>();
+    private final String IN_QUEUE_NAME;
+    private final String OUT_QUEUE_NAME;
+    private Connection connection;
+    private Channel channel;
+    private final String name;
+    private List<String> items = new ArrayList<>();
 
     public Dostawca(String IN_QUEUE_NAME, String OUT_QUEUE_NAME, String name) throws Exception{
         this.IN_QUEUE_NAME = IN_QUEUE_NAME;
@@ -82,11 +82,11 @@ public class Dostawca {
         String[] splitted = message.split(" ");
         for(String item : this.items){
             if(splitted[1].equals(item)){
-                this.sendMessage("ACK from " + name, OUT_QUEUE_NAME);
+                this.sendMessage("ACK from " + name, OUT_QUEUE_NAME + splitted[0]);
                 return;
             }
         }
-        this.sendMessage("DEC from " + name, OUT_QUEUE_NAME);
+        this.sendMessage("DEC from " + name, OUT_QUEUE_NAME + splitted[0]);
     }
 
     private void sendMessage(String message, String queueName) throws Exception{
