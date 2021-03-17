@@ -8,6 +8,7 @@ public class Dostawca {
 
     private final String IN_QUEUE_NAME;
     private final String OUT_QUEUE_NAME;
+    static String ADMIN_QUEUE = "OD_DOSTAWCY_DO_ADMINA";
     private Connection connection;
     private Channel channel;
     private final String name;
@@ -47,9 +48,9 @@ public class Dostawca {
     private void setUpChannel() throws Exception{
         this.connection = setUpConnection();
         this.channel = this.connection.createChannel();
-        this.setUpQueue(IN_QUEUE_NAME);
         this.setUpQueue(OUT_QUEUE_NAME);
-    };
+        this.setUpQueue(ADMIN_QUEUE);
+    }
 
     private void startListening() throws Exception{
         setUpChannel();
@@ -92,5 +93,6 @@ public class Dostawca {
     private void sendMessage(String message, String queueName) throws Exception{
         System.out.println(message);
         this.channel.basicPublish("", queueName, null, message.getBytes());
+        this.channel.basicPublish("", ADMIN_QUEUE, null, message.getBytes());
     }
 }

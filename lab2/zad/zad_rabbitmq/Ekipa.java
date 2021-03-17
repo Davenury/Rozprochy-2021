@@ -12,6 +12,7 @@ public class Ekipa {
     private String name;
     private String OUT_QUEUE = "OD_EKIPY";
     private String IN_QUEUE = "OD_DOSTAWCY_DO_";
+    static String ADMIN_QUEUE = "OD_EKIPY_DO_ADMINA";
     private String order;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private int numberOfSuppliers;
@@ -36,6 +37,7 @@ public class Ekipa {
         this.setUpChannel();
         channel.queueDeclare(OUT_QUEUE, false, false, false, null);
         channel.queueDeclare(IN_QUEUE, false, false, false, null);
+        channel.queueDeclare(ADMIN_QUEUE, false, false, false, null);
     }
 
     private void createConsumerAndListen() throws Exception{
@@ -73,6 +75,7 @@ public class Ekipa {
     private void sendOrder() throws Exception{
         String message = this.name + " " + order;
         channel.basicPublish("", OUT_QUEUE, null, message.getBytes());
+        this.channel.basicPublish("", ADMIN_QUEUE, null, message.getBytes());
         System.out.println("Sent: " + message);
         this.counter++;
     }
