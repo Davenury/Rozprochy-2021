@@ -1,6 +1,8 @@
 import com.rabbitmq.client.*;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 public class Admin {
@@ -8,12 +10,16 @@ public class Admin {
     private Channel channel;
     private String TEAM_QUEUE;
     private String SUPPLIER_QUEUE;
+    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private String EXCHANGE_NAME = "exchange";
 
     public Admin(String TEAM_QUEUE, String SUPPLIER_QUEUE) throws Exception {
         this.TEAM_QUEUE = TEAM_QUEUE;
         this.SUPPLIER_QUEUE = SUPPLIER_QUEUE;
         setUpChannel();
+        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
         startListening();
+        waitForOrders();
     }
 
     private void setUpChannel() throws Exception{
@@ -45,5 +51,31 @@ public class Admin {
 
     private void setUpQueue(String name) throws Exception{
         this.channel.queueDeclare(name, false, false, false, null);
+    }
+
+    private void waitForOrders() throws Exception{
+        String command;
+        String message;
+        while(true){
+            command = br.readLine();
+            if("exit".equals(command)){
+                break;
+            }
+            message = br.readLine();
+            makeOrder(command, message);
+        }
+    }
+
+    private void makeOrder(String command, String message) throws Exception{
+        if(command.equals("all")){
+            command = "ekipa.dostawca";
+        }else if(command.equals("equipe")){
+            command = "ekipa.";
+        }else{
+            command = ".dostawca";
+        }
+        message = "Od Admina: " + message;
+        this.channel.basicPublish(EXCHANGE_NAME, command, null, message.getBytes());
+        System.out.println(command + " " + message);
     }
 }

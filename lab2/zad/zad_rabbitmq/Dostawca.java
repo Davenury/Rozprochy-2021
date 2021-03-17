@@ -8,7 +8,8 @@ public class Dostawca {
 
     private final String IN_QUEUE_NAME;
     private final String OUT_QUEUE_NAME;
-    static String ADMIN_QUEUE = "OD_DOSTAWCY_DO_ADMINA";
+    private String ADMIN_QUEUE = "OD_DOSTAWCY_DO_ADMINA";
+    private String EXCHANGE_NAME = "exchange";
     private Connection connection;
     private Channel channel;
     private final String name;
@@ -56,6 +57,16 @@ public class Dostawca {
         setUpChannel();
         Consumer consumer = createConsumer();
         channel.basicConsume(IN_QUEUE_NAME, true, consumer);
+        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+        String queueName = channel.queueDeclare().getQueue();
+        channel.queueBind(queueName, EXCHANGE_NAME, "*.dostawca");
+        channel.basicConsume(queueName, true, new DefaultConsumer(this.channel){
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String message = new String(body, "UTF-8");
+                System.out.println("Got: " + message);
+            }
+        });
     }
 
     private void close() throws Exception{

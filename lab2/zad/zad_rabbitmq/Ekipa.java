@@ -17,6 +17,7 @@ public class Ekipa {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private int numberOfSuppliers;
     private int counter = 0;
+    private String EXCHANGE_NAME = "exchange";
 
     public Ekipa(String name, int numberOfSuppliers) throws Exception{
         this.name = name;
@@ -65,6 +66,16 @@ public class Ekipa {
             }
         };
         this.channel.basicConsume(IN_QUEUE, true, consumer);
+        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+        String queueName = channel.queueDeclare().getQueue();
+        channel.queueBind(queueName, EXCHANGE_NAME, "ekipa.*");
+        this.channel.basicConsume(queueName, true, new DefaultConsumer(this.channel){
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String message = new String(body, "UTF-8");
+                System.out.println("Got: " + message);
+            }
+        });
     }
 
     private void close() throws Exception{
