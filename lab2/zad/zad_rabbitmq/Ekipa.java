@@ -92,6 +92,7 @@ public class Ekipa {
     }
 
     private void makeOrders() throws Exception{
+        System.out.println("Make orders now!");
         while(true){
             order = this.br.readLine();
             if("exit".equals(order)){

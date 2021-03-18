@@ -69,13 +69,12 @@ public class Admin {
     private void makeOrder(String command, String message) throws Exception{
         if(command.equals("all")){
             command = "ekipa.dostawca";
-        }else if(command.equals("equipe")){
+        }else if(command.equals("ekipa")){
             command = "ekipa.";
         }else{
             command = ".dostawca";
         }
         message = "Od Admina: " + message;
         this.channel.basicPublish(EXCHANGE_NAME, command, null, message.getBytes());
-        System.out.println(command + " " + message);
     }
 }

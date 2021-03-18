@@ -89,7 +89,6 @@ public class Dostawca {
         };
     }
 
-    //TODO ekipy też dostają wiadomości na zmianę
     private void parseMessage(String message) throws Exception{
         String[] splitted = message.split(" ");
         for(String item : this.items){
