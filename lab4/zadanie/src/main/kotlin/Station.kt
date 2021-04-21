@@ -12,7 +12,7 @@ class Station(
     private lateinit var end: Instant
 
     private fun ask(query: Query){
-        this.dispatcherRef.tell(query, context.self)
+        this.dispatcherRef.tell(query.toStationQuery(context.self), context.self)
     }
 
     override fun createReceive(): Receive {
@@ -24,7 +24,7 @@ class Station(
             .match(Response::class.java){
                 end = Instant.now()
                 val delta = end.toEpochMilli() - start.toEpochMilli()
-                println("Station: $name, Answer came after: $delta, Errors: ${it.map.size}, percentage: ${it.percentage}")
+                println("Station: $name, time: $delta, number of errors: ${it.map.size}, percentage of not timeouted: ${it.percentage}")
                 it.map.forEach {
                     println("${it.key}: ${it.value}")
                 }
@@ -36,7 +36,5 @@ class Station(
         fun props(dispatcherRef: ActorRef): Props{
             return Props.create(Station::class.java, dispatcherRef)
         }
-
-        private val id: Int = 0
     }
 }
