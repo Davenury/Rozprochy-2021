@@ -74,3 +74,16 @@ data class StationWithQueryId(
 data class DBQuery(
         val satelliteId: Int
 )
+
+data class AskToDB(
+        val satelliteId: Int
+)
+
+data class DBActorUpdate(
+        val map: Map<Int, SatelliteAPI.Status>
+)
+
+data class DBActorResponse(
+        val result: Int?,
+        val satelliteId: Int
+)
