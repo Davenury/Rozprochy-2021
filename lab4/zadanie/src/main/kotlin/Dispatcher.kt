@@ -9,12 +9,14 @@ class Dispatcher(
         private val satellites: List<ActorRef>
 ) : AbstractActor() {
 
-    private val map = HashMap<ActorRef, QueryWithResponses>()
+    private val map = HashMap<StationWithQueryId, QueryWithResponses>()
 
     override fun createReceive(): Receive {
         return receiveBuilder().match(StationQuery::class.java) {
-            map[it.station] = QueryWithResponses(it.toInternalQuery())
-            this.ask(it.toInternalQuery())
+            val internal = it.toInternalQuery()
+            //println("" + it.station + " " + it.query.queryId)
+            map[StationWithQueryId(it.station, it.query.queryId)] = QueryWithResponses(internal)
+            this.ask(internal)
         }
         .match(SatelliteResponse::class.java) {response ->
             handleSatelliteResponse(response)?.let{
@@ -38,7 +40,7 @@ class Dispatcher(
     }
 
     private fun handleSatelliteResponse(response: SatelliteResponse): QueryWithResponses? {
-        map[response.internalQuery.station]?.let{
+        map[StationWithQueryId(response.internalQuery.station, response.internalQuery.query.queryId)]?.let{
             it.list.add(response)
             if(it.list.size == it.query.query.range){
                 return it

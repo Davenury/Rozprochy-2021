@@ -4,22 +4,25 @@ import akka.actor.Props
 import java.time.Instant
 
 class Station(
-    private val dispatcherRef: ActorRef
+    private val dispatcherRef: ActorRef,
+    private val name: String
 ) : AbstractActor() {
 
-    private val name = "xd"
+    private var id = 0
     private lateinit var start: Instant
     private lateinit var end: Instant
 
     private fun ask(query: Query){
-        this.dispatcherRef.tell(query.toStationQuery(context.self), context.self)
+        this.dispatcherRef.tell(query.toStationQuery(self), self)
     }
 
     override fun createReceive(): Receive {
         return receiveBuilder()
-            .match(Query::class.java){
+            .match(NotFullQuery::class.java){
                 start = Instant.now()
-                this.ask(it)
+                println(start.toEpochMilli())
+                id++
+                this.ask(it.toQuery(id))
             }
             .match(Response::class.java){
                 end = Instant.now()
@@ -33,8 +36,8 @@ class Station(
     }
 
     companion object{
-        fun props(dispatcherRef: ActorRef): Props{
-            return Props.create(Station::class.java, dispatcherRef)
+        fun props(dispatcherRef: ActorRef, name: String): Props{
+            return Props.create(Station::class.java, dispatcherRef, name)
         }
     }
 }

@@ -1,6 +1,18 @@
 import akka.actor.ActorRef
 import java.time.Instant
 
+data class NotFullQuery(
+        val firstStaId: Int,
+        val range: Int,
+        val timeout: Long
+)
+fun NotFullQuery.toQuery(queryId: Int) = Query(
+        queryId,
+        this.firstStaId,
+        this.range,
+        this.timeout
+)
+
 data class Query(
     val queryId: Int,
     val firstStaId: Int,
@@ -52,4 +64,9 @@ data class SatelliteResponse(
         var start: Instant,
         var end: Instant,
         val internalQuery: InternalQuery
+)
+
+data class StationWithQueryId(
+        val station: ActorRef,
+        val queryId: Int
 )

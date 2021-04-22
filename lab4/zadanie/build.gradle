@@ -21,6 +21,7 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation 'com.typesafe.akka:akka-cluster-sharding-typed_2.13:2.6.14'
+    compile group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
 }
 
 compileKotlin {
