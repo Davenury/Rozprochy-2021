@@ -21,7 +21,6 @@ class Station(
         return receiveBuilder()
             .match(NotFullQuery::class.java){
                 start = Instant.now()
-                println(start.toEpochMilli())
                 id++
                 this.ask(it.toQuery(id))
             }
