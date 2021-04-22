@@ -70,3 +70,7 @@ data class StationWithQueryId(
         val station: ActorRef,
         val queryId: Int
 )
+
+data class DBQuery(
+        val satelliteId: Int
+)

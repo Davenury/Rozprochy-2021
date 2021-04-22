@@ -1,11 +1,13 @@
 import akka.actor.AbstractActor
 import akka.actor.ActorRef
 import akka.actor.Props
+import java.sql.Connection
 import java.time.Instant
 
 class Station(
     private val dispatcherRef: ActorRef,
-    private val name: String
+    private val name: String,
+    private val connection: Connection?
 ) : AbstractActor() {
 
     private var id = 0
@@ -31,13 +33,21 @@ class Station(
                 it.map.forEach {
                     println("${it.key}: ${it.value}")
                 }
+                DB.addNumberOfMistakes(it.map, connection)
+            }
+            .match(DBQuery::class.java){
+                val result = DB.getNumberOfMistakes(it.satelliteId, connection)
+                result?.let {result ->
+                    if (result > 0)
+                        println("DB result for ${it.satelliteId}: $result")
+                }
             }
             .build()
     }
 
     companion object{
-        fun props(dispatcherRef: ActorRef, name: String): Props{
-            return Props.create(Station::class.java, dispatcherRef, name)
+        fun props(dispatcherRef: ActorRef, name: String, connection: Connection?): Props{
+            return Props.create(Station::class.java, dispatcherRef, name, connection)
         }
     }
 }
