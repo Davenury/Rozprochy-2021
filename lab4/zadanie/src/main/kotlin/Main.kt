@@ -8,12 +8,7 @@ import kotlin.random.Random
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>){
-    try {
-        val number = parseLong(args[0])
-    } catch (e: NumberFormatException){
-        println("Number of seconds to wait isn't a number!")
-        exitProcess(0)
-    }
+    argsCheck(args)
 
     val connection = DB.connect()
 
@@ -35,15 +30,28 @@ fun main(args: Array<String>){
     val station2 = system.actorOf(Station.props(dispatcher, "station-2", dbActor), "station-2")
     val station3 = system.actorOf(Station.props(dispatcher, "station-3", dbActor), "station-3")
 
-    station1.tell(NotFullQuery( 100 + Random.nextInt(50), 50, 300), ActorRef.noSender())
-    station1.tell(NotFullQuery( 100 + Random.nextInt(50), 50, 300), ActorRef.noSender())
-    station2.tell(NotFullQuery( 100 + Random.nextInt(50), 50, 300), ActorRef.noSender())
-    station2.tell(NotFullQuery( 100 + Random.nextInt(50), 50, 300), ActorRef.noSender())
-    station3.tell(NotFullQuery( 100 + Random.nextInt(50), 50, 300), ActorRef.noSender())
-    station3.tell(NotFullQuery( 100 + Random.nextInt(50), 50, 300), ActorRef.noSender())
+    ask(station1)
+    ask(station1)
+    ask(station2)
+    ask(station2)
+    ask(station3)
+    ask(station3)
 
     Thread.sleep(args[0].toLong() * 1000)
     for(i in 100..199){
         station1.tell(AskToDB(i), ActorRef.noSender())
     }
+}
+
+fun argsCheck(args: Array<String>){
+    try {
+        val number = parseLong(args[0])
+    } catch (e: NumberFormatException){
+        println("Number of seconds to wait isn't a number!")
+        exitProcess(0)
+    }
+}
+
+fun ask(station: ActorRef){
+    station.tell(NotFullQuery(100 + Random.nextInt(50), 50, 300), ActorRef.noSender())
 }
