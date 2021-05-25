@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    {% if bad == "all" %}
+        <h3>You didn't insert any pokemon!</h3>
+    {% endif %}
+        {% if bad != "all" and bad > 0 %}
+        <h3>{{bad}} of your pokemons weren't find - they were excluded from overall results</h3>
+        {% endif %}
+        {% if bad!="all" %}
+            {% for name, moves_list in moves.items() %}
+                <h1>{{name}}</h1>
+                <ul>
+                    {% for move in moves_list %}
+                    <li>{{move.get("move").get("name")}}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% endif %}
+
+</body>
+</html>

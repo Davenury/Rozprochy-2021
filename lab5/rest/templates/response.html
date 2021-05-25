@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if bad > 0 %}
+    <h3>{{bad}} of your pokemons weren't find - they were excluded from overall results</h3>
+    {% endif %}
+    {% for key, value in data.items() %}
+        <h1>{{ key }}</h1>
+        {% if key == 'Means' %}
+            {% for key2, value2 in value.items() %}
+                <p>{{key2}} : {{value2}}</p>
+            {% endfor %}
+        {% else %}
+            {% for key2, value2 in value.items() %}
+                <p>{{key2}} : {{value2.get("stat")}} : {{value2.get("name")}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+</body>
+</html>
