@@ -48,6 +48,19 @@ public class Client {
                         .build())
                 .build()
         );
+
+        Definitions.Telemetry telemetry = Definitions.Telemetry.newBuilder()
+                .setSender("Client1")
+                .setTime(new Timestamp(new Date().getTime()).toString())
+                .setValue(50)
+                .setTemperature(Definitions.Temperature.newBuilder()
+                        .setPlace("My place")
+                        .build())
+                .build();
+
+        stub.sendTelemetries(Definitions.ListOfTelemetry.newBuilder()
+                .addTelemetries(telemetry)
+                .build());
         System.out.println("Send temperature");
     }
 }

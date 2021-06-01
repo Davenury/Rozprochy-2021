@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+message Water{
+  string appartement = 1;
+}
+
+message Electricity{
+  string device = 1;
+}
+
+message Temperature{
+  string place = 1;
+}
+
+message Telemetry{
+  string time = 1;
+  float value = 2;
+  string sender = 3;
+  string unit = 4;
+
+  oneof detector {
+    Water water = 5;
+    Electricity electricity = 6;
+    Temperature temperature = 7;
+  }
+}
+
+message ListOfTelemetry {
+  repeated Telemetry telemetries = 1;
+}
+
+message Null{}
+
+service TelemetryService{
+  rpc sendTelemetry (Telemetry) returns (Null);
+  rpc sendTelemetries (ListOfTelemetry) returns (Null);
+}

@@ -1752,47 +1752,59 @@ public final class Definitions {
         getSenderBytes();
 
     /**
-     * <code>.Water water = 4;</code>
+     * <code>string unit = 4;</code>
+     * @return The unit.
+     */
+    java.lang.String getUnit();
+    /**
+     * <code>string unit = 4;</code>
+     * @return The bytes for unit.
+     */
+    com.google.protobuf.ByteString
+        getUnitBytes();
+
+    /**
+     * <code>.Water water = 5;</code>
      * @return Whether the water field is set.
      */
     boolean hasWater();
     /**
-     * <code>.Water water = 4;</code>
+     * <code>.Water water = 5;</code>
      * @return The water.
      */
     Definitions.Water getWater();
     /**
-     * <code>.Water water = 4;</code>
+     * <code>.Water water = 5;</code>
      */
     Definitions.WaterOrBuilder getWaterOrBuilder();
 
     /**
-     * <code>.Electricity electricity = 5;</code>
+     * <code>.Electricity electricity = 6;</code>
      * @return Whether the electricity field is set.
      */
     boolean hasElectricity();
     /**
-     * <code>.Electricity electricity = 5;</code>
+     * <code>.Electricity electricity = 6;</code>
      * @return The electricity.
      */
     Definitions.Electricity getElectricity();
     /**
-     * <code>.Electricity electricity = 5;</code>
+     * <code>.Electricity electricity = 6;</code>
      */
     Definitions.ElectricityOrBuilder getElectricityOrBuilder();
 
     /**
-     * <code>.Temperature temperature = 6;</code>
+     * <code>.Temperature temperature = 7;</code>
      * @return Whether the temperature field is set.
      */
     boolean hasTemperature();
     /**
-     * <code>.Temperature temperature = 6;</code>
+     * <code>.Temperature temperature = 7;</code>
      * @return The temperature.
      */
     Definitions.Temperature getTemperature();
     /**
-     * <code>.Temperature temperature = 6;</code>
+     * <code>.Temperature temperature = 7;</code>
      */
     Definitions.TemperatureOrBuilder getTemperatureOrBuilder();
 
@@ -1813,6 +1825,7 @@ public final class Definitions {
     private Telemetry() {
       time_ = "";
       sender_ = "";
+      unit_ = "";
     }
 
     @java.lang.Override
@@ -1863,8 +1876,14 @@ public final class Definitions {
               break;
             }
             case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              unit_ = s;
+              break;
+            }
+            case 42: {
               Definitions.Water.Builder subBuilder = null;
-              if (detectorCase_ == 4) {
+              if (detectorCase_ == 5) {
                 subBuilder = ((Definitions.Water) detector_).toBuilder();
               }
               detector_ =
@@ -1873,12 +1892,12 @@ public final class Definitions {
                 subBuilder.mergeFrom((Definitions.Water) detector_);
                 detector_ = subBuilder.buildPartial();
               }
-              detectorCase_ = 4;
+              detectorCase_ = 5;
               break;
             }
-            case 42: {
+            case 50: {
               Definitions.Electricity.Builder subBuilder = null;
-              if (detectorCase_ == 5) {
+              if (detectorCase_ == 6) {
                 subBuilder = ((Definitions.Electricity) detector_).toBuilder();
               }
               detector_ =
@@ -1887,12 +1906,12 @@ public final class Definitions {
                 subBuilder.mergeFrom((Definitions.Electricity) detector_);
                 detector_ = subBuilder.buildPartial();
               }
-              detectorCase_ = 5;
+              detectorCase_ = 6;
               break;
             }
-            case 50: {
+            case 58: {
               Definitions.Temperature.Builder subBuilder = null;
-              if (detectorCase_ == 6) {
+              if (detectorCase_ == 7) {
                 subBuilder = ((Definitions.Temperature) detector_).toBuilder();
               }
               detector_ =
@@ -1901,7 +1920,7 @@ public final class Definitions {
                 subBuilder.mergeFrom((Definitions.Temperature) detector_);
                 detector_ = subBuilder.buildPartial();
               }
-              detectorCase_ = 6;
+              detectorCase_ = 7;
               break;
             }
             default: {
@@ -1941,9 +1960,9 @@ public final class Definitions {
     public enum DetectorCase
         implements com.google.protobuf.Internal.EnumLite,
             com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-      WATER(4),
-      ELECTRICITY(5),
-      TEMPERATURE(6),
+      WATER(5),
+      ELECTRICITY(6),
+      TEMPERATURE(7),
       DETECTOR_NOT_SET(0);
       private final int value;
       private DetectorCase(int value) {
@@ -1961,9 +1980,9 @@ public final class Definitions {
 
       public static DetectorCase forNumber(int value) {
         switch (value) {
-          case 4: return WATER;
-          case 5: return ELECTRICITY;
-          case 6: return TEMPERATURE;
+          case 5: return WATER;
+          case 6: return ELECTRICITY;
+          case 7: return TEMPERATURE;
           case 0: return DETECTOR_NOT_SET;
           default: return null;
         }
@@ -2066,94 +2085,132 @@ public final class Definitions {
       }
     }
 
-    public static final int WATER_FIELD_NUMBER = 4;
+    public static final int UNIT_FIELD_NUMBER = 4;
+    private volatile java.lang.Object unit_;
     /**
-     * <code>.Water water = 4;</code>
+     * <code>string unit = 4;</code>
+     * @return The unit.
+     */
+    @java.lang.Override
+    public java.lang.String getUnit() {
+      java.lang.Object ref = unit_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        unit_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string unit = 4;</code>
+     * @return The bytes for unit.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUnitBytes() {
+      java.lang.Object ref = unit_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        unit_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int WATER_FIELD_NUMBER = 5;
+    /**
+     * <code>.Water water = 5;</code>
      * @return Whether the water field is set.
      */
     @java.lang.Override
     public boolean hasWater() {
-      return detectorCase_ == 4;
+      return detectorCase_ == 5;
     }
     /**
-     * <code>.Water water = 4;</code>
+     * <code>.Water water = 5;</code>
      * @return The water.
      */
     @java.lang.Override
     public Definitions.Water getWater() {
-      if (detectorCase_ == 4) {
+      if (detectorCase_ == 5) {
          return (Definitions.Water) detector_;
       }
       return Definitions.Water.getDefaultInstance();
     }
     /**
-     * <code>.Water water = 4;</code>
+     * <code>.Water water = 5;</code>
      */
     @java.lang.Override
     public Definitions.WaterOrBuilder getWaterOrBuilder() {
-      if (detectorCase_ == 4) {
+      if (detectorCase_ == 5) {
          return (Definitions.Water) detector_;
       }
       return Definitions.Water.getDefaultInstance();
     }
 
-    public static final int ELECTRICITY_FIELD_NUMBER = 5;
+    public static final int ELECTRICITY_FIELD_NUMBER = 6;
     /**
-     * <code>.Electricity electricity = 5;</code>
+     * <code>.Electricity electricity = 6;</code>
      * @return Whether the electricity field is set.
      */
     @java.lang.Override
     public boolean hasElectricity() {
-      return detectorCase_ == 5;
+      return detectorCase_ == 6;
     }
     /**
-     * <code>.Electricity electricity = 5;</code>
+     * <code>.Electricity electricity = 6;</code>
      * @return The electricity.
      */
     @java.lang.Override
     public Definitions.Electricity getElectricity() {
-      if (detectorCase_ == 5) {
+      if (detectorCase_ == 6) {
          return (Definitions.Electricity) detector_;
       }
       return Definitions.Electricity.getDefaultInstance();
     }
     /**
-     * <code>.Electricity electricity = 5;</code>
+     * <code>.Electricity electricity = 6;</code>
      */
     @java.lang.Override
     public Definitions.ElectricityOrBuilder getElectricityOrBuilder() {
-      if (detectorCase_ == 5) {
+      if (detectorCase_ == 6) {
          return (Definitions.Electricity) detector_;
       }
       return Definitions.Electricity.getDefaultInstance();
     }
 
-    public static final int TEMPERATURE_FIELD_NUMBER = 6;
+    public static final int TEMPERATURE_FIELD_NUMBER = 7;
     /**
-     * <code>.Temperature temperature = 6;</code>
+     * <code>.Temperature temperature = 7;</code>
      * @return Whether the temperature field is set.
      */
     @java.lang.Override
     public boolean hasTemperature() {
-      return detectorCase_ == 6;
+      return detectorCase_ == 7;
     }
     /**
-     * <code>.Temperature temperature = 6;</code>
+     * <code>.Temperature temperature = 7;</code>
      * @return The temperature.
      */
     @java.lang.Override
     public Definitions.Temperature getTemperature() {
-      if (detectorCase_ == 6) {
+      if (detectorCase_ == 7) {
          return (Definitions.Temperature) detector_;
       }
       return Definitions.Temperature.getDefaultInstance();
     }
     /**
-     * <code>.Temperature temperature = 6;</code>
+     * <code>.Temperature temperature = 7;</code>
      */
     @java.lang.Override
     public Definitions.TemperatureOrBuilder getTemperatureOrBuilder() {
-      if (detectorCase_ == 6) {
+      if (detectorCase_ == 7) {
          return (Definitions.Temperature) detector_;
       }
       return Definitions.Temperature.getDefaultInstance();
@@ -2182,14 +2239,17 @@ public final class Definitions {
       if (!getSenderBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, sender_);
       }
-      if (detectorCase_ == 4) {
-        output.writeMessage(4, (Definitions.Water) detector_);
+      if (!getUnitBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, unit_);
       }
       if (detectorCase_ == 5) {
-        output.writeMessage(5, (Definitions.Electricity) detector_);
+        output.writeMessage(5, (Definitions.Water) detector_);
       }
       if (detectorCase_ == 6) {
-        output.writeMessage(6, (Definitions.Temperature) detector_);
+        output.writeMessage(6, (Definitions.Electricity) detector_);
+      }
+      if (detectorCase_ == 7) {
+        output.writeMessage(7, (Definitions.Temperature) detector_);
       }
       unknownFields.writeTo(output);
     }
@@ -2210,17 +2270,20 @@ public final class Definitions {
       if (!getSenderBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, sender_);
       }
-      if (detectorCase_ == 4) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, (Definitions.Water) detector_);
+      if (!getUnitBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, unit_);
       }
       if (detectorCase_ == 5) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, (Definitions.Electricity) detector_);
+          .computeMessageSize(5, (Definitions.Water) detector_);
       }
       if (detectorCase_ == 6) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, (Definitions.Temperature) detector_);
+          .computeMessageSize(6, (Definitions.Electricity) detector_);
+      }
+      if (detectorCase_ == 7) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, (Definitions.Temperature) detector_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2244,17 +2307,19 @@ public final class Definitions {
               other.getValue())) return false;
       if (!getSender()
           .equals(other.getSender())) return false;
+      if (!getUnit()
+          .equals(other.getUnit())) return false;
       if (!getDetectorCase().equals(other.getDetectorCase())) return false;
       switch (detectorCase_) {
-        case 4:
+        case 5:
           if (!getWater()
               .equals(other.getWater())) return false;
           break;
-        case 5:
+        case 6:
           if (!getElectricity()
               .equals(other.getElectricity())) return false;
           break;
-        case 6:
+        case 7:
           if (!getTemperature()
               .equals(other.getTemperature())) return false;
           break;
@@ -2279,16 +2344,18 @@ public final class Definitions {
           getValue());
       hash = (37 * hash) + SENDER_FIELD_NUMBER;
       hash = (53 * hash) + getSender().hashCode();
+      hash = (37 * hash) + UNIT_FIELD_NUMBER;
+      hash = (53 * hash) + getUnit().hashCode();
       switch (detectorCase_) {
-        case 4:
+        case 5:
           hash = (37 * hash) + WATER_FIELD_NUMBER;
           hash = (53 * hash) + getWater().hashCode();
           break;
-        case 5:
+        case 6:
           hash = (37 * hash) + ELECTRICITY_FIELD_NUMBER;
           hash = (53 * hash) + getElectricity().hashCode();
           break;
-        case 6:
+        case 7:
           hash = (37 * hash) + TEMPERATURE_FIELD_NUMBER;
           hash = (53 * hash) + getTemperature().hashCode();
           break;
@@ -2434,6 +2501,8 @@ public final class Definitions {
 
         sender_ = "";
 
+        unit_ = "";
+
         detectorCase_ = 0;
         detector_ = null;
         return this;
@@ -2465,21 +2534,22 @@ public final class Definitions {
         result.time_ = time_;
         result.value_ = value_;
         result.sender_ = sender_;
-        if (detectorCase_ == 4) {
+        result.unit_ = unit_;
+        if (detectorCase_ == 5) {
           if (waterBuilder_ == null) {
             result.detector_ = detector_;
           } else {
             result.detector_ = waterBuilder_.build();
           }
         }
-        if (detectorCase_ == 5) {
+        if (detectorCase_ == 6) {
           if (electricityBuilder_ == null) {
             result.detector_ = detector_;
           } else {
             result.detector_ = electricityBuilder_.build();
           }
         }
-        if (detectorCase_ == 6) {
+        if (detectorCase_ == 7) {
           if (temperatureBuilder_ == null) {
             result.detector_ = detector_;
           } else {
@@ -2544,6 +2614,10 @@ public final class Definitions {
         }
         if (!other.getSender().isEmpty()) {
           sender_ = other.sender_;
+          onChanged();
+        }
+        if (!other.getUnit().isEmpty()) {
+          unit_ = other.unit_;
           onChanged();
         }
         switch (other.getDetectorCase()) {
@@ -2790,36 +2864,112 @@ public final class Definitions {
         return this;
       }
 
+      private java.lang.Object unit_ = "";
+      /**
+       * <code>string unit = 4;</code>
+       * @return The unit.
+       */
+      public java.lang.String getUnit() {
+        java.lang.Object ref = unit_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          unit_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string unit = 4;</code>
+       * @return The bytes for unit.
+       */
+      public com.google.protobuf.ByteString
+          getUnitBytes() {
+        java.lang.Object ref = unit_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          unit_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string unit = 4;</code>
+       * @param value The unit to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUnit(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        unit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string unit = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUnit() {
+        
+        unit_ = getDefaultInstance().getUnit();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string unit = 4;</code>
+       * @param value The bytes for unit to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUnitBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        unit_ = value;
+        onChanged();
+        return this;
+      }
+
       private com.google.protobuf.SingleFieldBuilderV3<
           Definitions.Water, Definitions.Water.Builder, Definitions.WaterOrBuilder> waterBuilder_;
       /**
-       * <code>.Water water = 4;</code>
+       * <code>.Water water = 5;</code>
        * @return Whether the water field is set.
        */
       @java.lang.Override
       public boolean hasWater() {
-        return detectorCase_ == 4;
+        return detectorCase_ == 5;
       }
       /**
-       * <code>.Water water = 4;</code>
+       * <code>.Water water = 5;</code>
        * @return The water.
        */
       @java.lang.Override
       public Definitions.Water getWater() {
         if (waterBuilder_ == null) {
-          if (detectorCase_ == 4) {
+          if (detectorCase_ == 5) {
             return (Definitions.Water) detector_;
           }
           return Definitions.Water.getDefaultInstance();
         } else {
-          if (detectorCase_ == 4) {
+          if (detectorCase_ == 5) {
             return waterBuilder_.getMessage();
           }
           return Definitions.Water.getDefaultInstance();
         }
       }
       /**
-       * <code>.Water water = 4;</code>
+       * <code>.Water water = 5;</code>
        */
       public Builder setWater(Definitions.Water value) {
         if (waterBuilder_ == null) {
@@ -2831,11 +2981,11 @@ public final class Definitions {
         } else {
           waterBuilder_.setMessage(value);
         }
-        detectorCase_ = 4;
+        detectorCase_ = 5;
         return this;
       }
       /**
-       * <code>.Water water = 4;</code>
+       * <code>.Water water = 5;</code>
        */
       public Builder setWater(
           Definitions.Water.Builder builderForValue) {
@@ -2845,15 +2995,15 @@ public final class Definitions {
         } else {
           waterBuilder_.setMessage(builderForValue.build());
         }
-        detectorCase_ = 4;
+        detectorCase_ = 5;
         return this;
       }
       /**
-       * <code>.Water water = 4;</code>
+       * <code>.Water water = 5;</code>
        */
       public Builder mergeWater(Definitions.Water value) {
         if (waterBuilder_ == null) {
-          if (detectorCase_ == 4 &&
+          if (detectorCase_ == 5 &&
               detector_ != Definitions.Water.getDefaultInstance()) {
             detector_ = Definitions.Water.newBuilder((Definitions.Water) detector_)
                 .mergeFrom(value).buildPartial();
@@ -2862,26 +3012,26 @@ public final class Definitions {
           }
           onChanged();
         } else {
-          if (detectorCase_ == 4) {
+          if (detectorCase_ == 5) {
             waterBuilder_.mergeFrom(value);
           }
           waterBuilder_.setMessage(value);
         }
-        detectorCase_ = 4;
+        detectorCase_ = 5;
         return this;
       }
       /**
-       * <code>.Water water = 4;</code>
+       * <code>.Water water = 5;</code>
        */
       public Builder clearWater() {
         if (waterBuilder_ == null) {
-          if (detectorCase_ == 4) {
+          if (detectorCase_ == 5) {
             detectorCase_ = 0;
             detector_ = null;
             onChanged();
           }
         } else {
-          if (detectorCase_ == 4) {
+          if (detectorCase_ == 5) {
             detectorCase_ = 0;
             detector_ = null;
           }
@@ -2890,33 +3040,33 @@ public final class Definitions {
         return this;
       }
       /**
-       * <code>.Water water = 4;</code>
+       * <code>.Water water = 5;</code>
        */
       public Definitions.Water.Builder getWaterBuilder() {
         return getWaterFieldBuilder().getBuilder();
       }
       /**
-       * <code>.Water water = 4;</code>
+       * <code>.Water water = 5;</code>
        */
       @java.lang.Override
       public Definitions.WaterOrBuilder getWaterOrBuilder() {
-        if ((detectorCase_ == 4) && (waterBuilder_ != null)) {
+        if ((detectorCase_ == 5) && (waterBuilder_ != null)) {
           return waterBuilder_.getMessageOrBuilder();
         } else {
-          if (detectorCase_ == 4) {
+          if (detectorCase_ == 5) {
             return (Definitions.Water) detector_;
           }
           return Definitions.Water.getDefaultInstance();
         }
       }
       /**
-       * <code>.Water water = 4;</code>
+       * <code>.Water water = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           Definitions.Water, Definitions.Water.Builder, Definitions.WaterOrBuilder> 
           getWaterFieldBuilder() {
         if (waterBuilder_ == null) {
-          if (!(detectorCase_ == 4)) {
+          if (!(detectorCase_ == 5)) {
             detector_ = Definitions.Water.getDefaultInstance();
           }
           waterBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -2926,7 +3076,7 @@ public final class Definitions {
                   isClean());
           detector_ = null;
         }
-        detectorCase_ = 4;
+        detectorCase_ = 5;
         onChanged();;
         return waterBuilder_;
       }
@@ -2934,33 +3084,33 @@ public final class Definitions {
       private com.google.protobuf.SingleFieldBuilderV3<
           Definitions.Electricity, Definitions.Electricity.Builder, Definitions.ElectricityOrBuilder> electricityBuilder_;
       /**
-       * <code>.Electricity electricity = 5;</code>
+       * <code>.Electricity electricity = 6;</code>
        * @return Whether the electricity field is set.
        */
       @java.lang.Override
       public boolean hasElectricity() {
-        return detectorCase_ == 5;
+        return detectorCase_ == 6;
       }
       /**
-       * <code>.Electricity electricity = 5;</code>
+       * <code>.Electricity electricity = 6;</code>
        * @return The electricity.
        */
       @java.lang.Override
       public Definitions.Electricity getElectricity() {
         if (electricityBuilder_ == null) {
-          if (detectorCase_ == 5) {
+          if (detectorCase_ == 6) {
             return (Definitions.Electricity) detector_;
           }
           return Definitions.Electricity.getDefaultInstance();
         } else {
-          if (detectorCase_ == 5) {
+          if (detectorCase_ == 6) {
             return electricityBuilder_.getMessage();
           }
           return Definitions.Electricity.getDefaultInstance();
         }
       }
       /**
-       * <code>.Electricity electricity = 5;</code>
+       * <code>.Electricity electricity = 6;</code>
        */
       public Builder setElectricity(Definitions.Electricity value) {
         if (electricityBuilder_ == null) {
@@ -2972,11 +3122,11 @@ public final class Definitions {
         } else {
           electricityBuilder_.setMessage(value);
         }
-        detectorCase_ = 5;
+        detectorCase_ = 6;
         return this;
       }
       /**
-       * <code>.Electricity electricity = 5;</code>
+       * <code>.Electricity electricity = 6;</code>
        */
       public Builder setElectricity(
           Definitions.Electricity.Builder builderForValue) {
@@ -2986,15 +3136,15 @@ public final class Definitions {
         } else {
           electricityBuilder_.setMessage(builderForValue.build());
         }
-        detectorCase_ = 5;
+        detectorCase_ = 6;
         return this;
       }
       /**
-       * <code>.Electricity electricity = 5;</code>
+       * <code>.Electricity electricity = 6;</code>
        */
       public Builder mergeElectricity(Definitions.Electricity value) {
         if (electricityBuilder_ == null) {
-          if (detectorCase_ == 5 &&
+          if (detectorCase_ == 6 &&
               detector_ != Definitions.Electricity.getDefaultInstance()) {
             detector_ = Definitions.Electricity.newBuilder((Definitions.Electricity) detector_)
                 .mergeFrom(value).buildPartial();
@@ -3003,26 +3153,26 @@ public final class Definitions {
           }
           onChanged();
         } else {
-          if (detectorCase_ == 5) {
+          if (detectorCase_ == 6) {
             electricityBuilder_.mergeFrom(value);
           }
           electricityBuilder_.setMessage(value);
         }
-        detectorCase_ = 5;
+        detectorCase_ = 6;
         return this;
       }
       /**
-       * <code>.Electricity electricity = 5;</code>
+       * <code>.Electricity electricity = 6;</code>
        */
       public Builder clearElectricity() {
         if (electricityBuilder_ == null) {
-          if (detectorCase_ == 5) {
+          if (detectorCase_ == 6) {
             detectorCase_ = 0;
             detector_ = null;
             onChanged();
           }
         } else {
-          if (detectorCase_ == 5) {
+          if (detectorCase_ == 6) {
             detectorCase_ = 0;
             detector_ = null;
           }
@@ -3031,33 +3181,33 @@ public final class Definitions {
         return this;
       }
       /**
-       * <code>.Electricity electricity = 5;</code>
+       * <code>.Electricity electricity = 6;</code>
        */
       public Definitions.Electricity.Builder getElectricityBuilder() {
         return getElectricityFieldBuilder().getBuilder();
       }
       /**
-       * <code>.Electricity electricity = 5;</code>
+       * <code>.Electricity electricity = 6;</code>
        */
       @java.lang.Override
       public Definitions.ElectricityOrBuilder getElectricityOrBuilder() {
-        if ((detectorCase_ == 5) && (electricityBuilder_ != null)) {
+        if ((detectorCase_ == 6) && (electricityBuilder_ != null)) {
           return electricityBuilder_.getMessageOrBuilder();
         } else {
-          if (detectorCase_ == 5) {
+          if (detectorCase_ == 6) {
             return (Definitions.Electricity) detector_;
           }
           return Definitions.Electricity.getDefaultInstance();
         }
       }
       /**
-       * <code>.Electricity electricity = 5;</code>
+       * <code>.Electricity electricity = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           Definitions.Electricity, Definitions.Electricity.Builder, Definitions.ElectricityOrBuilder> 
           getElectricityFieldBuilder() {
         if (electricityBuilder_ == null) {
-          if (!(detectorCase_ == 5)) {
+          if (!(detectorCase_ == 6)) {
             detector_ = Definitions.Electricity.getDefaultInstance();
           }
           electricityBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -3067,7 +3217,7 @@ public final class Definitions {
                   isClean());
           detector_ = null;
         }
-        detectorCase_ = 5;
+        detectorCase_ = 6;
         onChanged();;
         return electricityBuilder_;
       }
@@ -3075,33 +3225,33 @@ public final class Definitions {
       private com.google.protobuf.SingleFieldBuilderV3<
           Definitions.Temperature, Definitions.Temperature.Builder, Definitions.TemperatureOrBuilder> temperatureBuilder_;
       /**
-       * <code>.Temperature temperature = 6;</code>
+       * <code>.Temperature temperature = 7;</code>
        * @return Whether the temperature field is set.
        */
       @java.lang.Override
       public boolean hasTemperature() {
-        return detectorCase_ == 6;
+        return detectorCase_ == 7;
       }
       /**
-       * <code>.Temperature temperature = 6;</code>
+       * <code>.Temperature temperature = 7;</code>
        * @return The temperature.
        */
       @java.lang.Override
       public Definitions.Temperature getTemperature() {
         if (temperatureBuilder_ == null) {
-          if (detectorCase_ == 6) {
+          if (detectorCase_ == 7) {
             return (Definitions.Temperature) detector_;
           }
           return Definitions.Temperature.getDefaultInstance();
         } else {
-          if (detectorCase_ == 6) {
+          if (detectorCase_ == 7) {
             return temperatureBuilder_.getMessage();
           }
           return Definitions.Temperature.getDefaultInstance();
         }
       }
       /**
-       * <code>.Temperature temperature = 6;</code>
+       * <code>.Temperature temperature = 7;</code>
        */
       public Builder setTemperature(Definitions.Temperature value) {
         if (temperatureBuilder_ == null) {
@@ -3113,11 +3263,11 @@ public final class Definitions {
         } else {
           temperatureBuilder_.setMessage(value);
         }
-        detectorCase_ = 6;
+        detectorCase_ = 7;
         return this;
       }
       /**
-       * <code>.Temperature temperature = 6;</code>
+       * <code>.Temperature temperature = 7;</code>
        */
       public Builder setTemperature(
           Definitions.Temperature.Builder builderForValue) {
@@ -3127,15 +3277,15 @@ public final class Definitions {
         } else {
           temperatureBuilder_.setMessage(builderForValue.build());
         }
-        detectorCase_ = 6;
+        detectorCase_ = 7;
         return this;
       }
       /**
-       * <code>.Temperature temperature = 6;</code>
+       * <code>.Temperature temperature = 7;</code>
        */
       public Builder mergeTemperature(Definitions.Temperature value) {
         if (temperatureBuilder_ == null) {
-          if (detectorCase_ == 6 &&
+          if (detectorCase_ == 7 &&
               detector_ != Definitions.Temperature.getDefaultInstance()) {
             detector_ = Definitions.Temperature.newBuilder((Definitions.Temperature) detector_)
                 .mergeFrom(value).buildPartial();
@@ -3144,26 +3294,26 @@ public final class Definitions {
           }
           onChanged();
         } else {
-          if (detectorCase_ == 6) {
+          if (detectorCase_ == 7) {
             temperatureBuilder_.mergeFrom(value);
           }
           temperatureBuilder_.setMessage(value);
         }
-        detectorCase_ = 6;
+        detectorCase_ = 7;
         return this;
       }
       /**
-       * <code>.Temperature temperature = 6;</code>
+       * <code>.Temperature temperature = 7;</code>
        */
       public Builder clearTemperature() {
         if (temperatureBuilder_ == null) {
-          if (detectorCase_ == 6) {
+          if (detectorCase_ == 7) {
             detectorCase_ = 0;
             detector_ = null;
             onChanged();
           }
         } else {
-          if (detectorCase_ == 6) {
+          if (detectorCase_ == 7) {
             detectorCase_ = 0;
             detector_ = null;
           }
@@ -3172,33 +3322,33 @@ public final class Definitions {
         return this;
       }
       /**
-       * <code>.Temperature temperature = 6;</code>
+       * <code>.Temperature temperature = 7;</code>
        */
       public Definitions.Temperature.Builder getTemperatureBuilder() {
         return getTemperatureFieldBuilder().getBuilder();
       }
       /**
-       * <code>.Temperature temperature = 6;</code>
+       * <code>.Temperature temperature = 7;</code>
        */
       @java.lang.Override
       public Definitions.TemperatureOrBuilder getTemperatureOrBuilder() {
-        if ((detectorCase_ == 6) && (temperatureBuilder_ != null)) {
+        if ((detectorCase_ == 7) && (temperatureBuilder_ != null)) {
           return temperatureBuilder_.getMessageOrBuilder();
         } else {
-          if (detectorCase_ == 6) {
+          if (detectorCase_ == 7) {
             return (Definitions.Temperature) detector_;
           }
           return Definitions.Temperature.getDefaultInstance();
         }
       }
       /**
-       * <code>.Temperature temperature = 6;</code>
+       * <code>.Temperature temperature = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           Definitions.Temperature, Definitions.Temperature.Builder, Definitions.TemperatureOrBuilder> 
           getTemperatureFieldBuilder() {
         if (temperatureBuilder_ == null) {
-          if (!(detectorCase_ == 6)) {
+          if (!(detectorCase_ == 7)) {
             detector_ = Definitions.Temperature.getDefaultInstance();
           }
           temperatureBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -3208,7 +3358,7 @@ public final class Definitions {
                   isClean());
           detector_ = null;
         }
-        detectorCase_ = 6;
+        detectorCase_ = 7;
         onChanged();;
         return temperatureBuilder_;
       }
@@ -3260,6 +3410,799 @@ public final class Definitions {
 
     @java.lang.Override
     public Definitions.Telemetry getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ListOfTelemetryOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ListOfTelemetry)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    java.util.List<Definitions.Telemetry> 
+        getTelemetriesList();
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    Definitions.Telemetry getTelemetries(int index);
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    int getTelemetriesCount();
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    java.util.List<? extends Definitions.TelemetryOrBuilder> 
+        getTelemetriesOrBuilderList();
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    Definitions.TelemetryOrBuilder getTelemetriesOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ListOfTelemetry}
+   */
+  public static final class ListOfTelemetry extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ListOfTelemetry)
+      ListOfTelemetryOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ListOfTelemetry.newBuilder() to construct.
+    private ListOfTelemetry(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ListOfTelemetry() {
+      telemetries_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ListOfTelemetry();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ListOfTelemetry(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                telemetries_ = new java.util.ArrayList<Definitions.Telemetry>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              telemetries_.add(
+                  input.readMessage(Definitions.Telemetry.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          telemetries_ = java.util.Collections.unmodifiableList(telemetries_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return Definitions.internal_static_ListOfTelemetry_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return Definitions.internal_static_ListOfTelemetry_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              Definitions.ListOfTelemetry.class, Definitions.ListOfTelemetry.Builder.class);
+    }
+
+    public static final int TELEMETRIES_FIELD_NUMBER = 1;
+    private java.util.List<Definitions.Telemetry> telemetries_;
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<Definitions.Telemetry> getTelemetriesList() {
+      return telemetries_;
+    }
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends Definitions.TelemetryOrBuilder> 
+        getTelemetriesOrBuilderList() {
+      return telemetries_;
+    }
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    @java.lang.Override
+    public int getTelemetriesCount() {
+      return telemetries_.size();
+    }
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    @java.lang.Override
+    public Definitions.Telemetry getTelemetries(int index) {
+      return telemetries_.get(index);
+    }
+    /**
+     * <code>repeated .Telemetry telemetries = 1;</code>
+     */
+    @java.lang.Override
+    public Definitions.TelemetryOrBuilder getTelemetriesOrBuilder(
+        int index) {
+      return telemetries_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < telemetries_.size(); i++) {
+        output.writeMessage(1, telemetries_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < telemetries_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, telemetries_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof Definitions.ListOfTelemetry)) {
+        return super.equals(obj);
+      }
+      Definitions.ListOfTelemetry other = (Definitions.ListOfTelemetry) obj;
+
+      if (!getTelemetriesList()
+          .equals(other.getTelemetriesList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getTelemetriesCount() > 0) {
+        hash = (37 * hash) + TELEMETRIES_FIELD_NUMBER;
+        hash = (53 * hash) + getTelemetriesList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static Definitions.ListOfTelemetry parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static Definitions.ListOfTelemetry parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static Definitions.ListOfTelemetry parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static Definitions.ListOfTelemetry parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static Definitions.ListOfTelemetry parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static Definitions.ListOfTelemetry parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static Definitions.ListOfTelemetry parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static Definitions.ListOfTelemetry parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static Definitions.ListOfTelemetry parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static Definitions.ListOfTelemetry parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static Definitions.ListOfTelemetry parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static Definitions.ListOfTelemetry parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(Definitions.ListOfTelemetry prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ListOfTelemetry}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ListOfTelemetry)
+        Definitions.ListOfTelemetryOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return Definitions.internal_static_ListOfTelemetry_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return Definitions.internal_static_ListOfTelemetry_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                Definitions.ListOfTelemetry.class, Definitions.ListOfTelemetry.Builder.class);
+      }
+
+      // Construct using Definitions.ListOfTelemetry.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getTelemetriesFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (telemetriesBuilder_ == null) {
+          telemetries_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          telemetriesBuilder_.clear();
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return Definitions.internal_static_ListOfTelemetry_descriptor;
+      }
+
+      @java.lang.Override
+      public Definitions.ListOfTelemetry getDefaultInstanceForType() {
+        return Definitions.ListOfTelemetry.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public Definitions.ListOfTelemetry build() {
+        Definitions.ListOfTelemetry result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public Definitions.ListOfTelemetry buildPartial() {
+        Definitions.ListOfTelemetry result = new Definitions.ListOfTelemetry(this);
+        int from_bitField0_ = bitField0_;
+        if (telemetriesBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            telemetries_ = java.util.Collections.unmodifiableList(telemetries_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.telemetries_ = telemetries_;
+        } else {
+          result.telemetries_ = telemetriesBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof Definitions.ListOfTelemetry) {
+          return mergeFrom((Definitions.ListOfTelemetry)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(Definitions.ListOfTelemetry other) {
+        if (other == Definitions.ListOfTelemetry.getDefaultInstance()) return this;
+        if (telemetriesBuilder_ == null) {
+          if (!other.telemetries_.isEmpty()) {
+            if (telemetries_.isEmpty()) {
+              telemetries_ = other.telemetries_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureTelemetriesIsMutable();
+              telemetries_.addAll(other.telemetries_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.telemetries_.isEmpty()) {
+            if (telemetriesBuilder_.isEmpty()) {
+              telemetriesBuilder_.dispose();
+              telemetriesBuilder_ = null;
+              telemetries_ = other.telemetries_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              telemetriesBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getTelemetriesFieldBuilder() : null;
+            } else {
+              telemetriesBuilder_.addAllMessages(other.telemetries_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Definitions.ListOfTelemetry parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (Definitions.ListOfTelemetry) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<Definitions.Telemetry> telemetries_ =
+        java.util.Collections.emptyList();
+      private void ensureTelemetriesIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          telemetries_ = new java.util.ArrayList<Definitions.Telemetry>(telemetries_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          Definitions.Telemetry, Definitions.Telemetry.Builder, Definitions.TelemetryOrBuilder> telemetriesBuilder_;
+
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public java.util.List<Definitions.Telemetry> getTelemetriesList() {
+        if (telemetriesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(telemetries_);
+        } else {
+          return telemetriesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public int getTelemetriesCount() {
+        if (telemetriesBuilder_ == null) {
+          return telemetries_.size();
+        } else {
+          return telemetriesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Definitions.Telemetry getTelemetries(int index) {
+        if (telemetriesBuilder_ == null) {
+          return telemetries_.get(index);
+        } else {
+          return telemetriesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Builder setTelemetries(
+          int index, Definitions.Telemetry value) {
+        if (telemetriesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTelemetriesIsMutable();
+          telemetries_.set(index, value);
+          onChanged();
+        } else {
+          telemetriesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Builder setTelemetries(
+          int index, Definitions.Telemetry.Builder builderForValue) {
+        if (telemetriesBuilder_ == null) {
+          ensureTelemetriesIsMutable();
+          telemetries_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          telemetriesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Builder addTelemetries(Definitions.Telemetry value) {
+        if (telemetriesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTelemetriesIsMutable();
+          telemetries_.add(value);
+          onChanged();
+        } else {
+          telemetriesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Builder addTelemetries(
+          int index, Definitions.Telemetry value) {
+        if (telemetriesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTelemetriesIsMutable();
+          telemetries_.add(index, value);
+          onChanged();
+        } else {
+          telemetriesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Builder addTelemetries(
+          Definitions.Telemetry.Builder builderForValue) {
+        if (telemetriesBuilder_ == null) {
+          ensureTelemetriesIsMutable();
+          telemetries_.add(builderForValue.build());
+          onChanged();
+        } else {
+          telemetriesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Builder addTelemetries(
+          int index, Definitions.Telemetry.Builder builderForValue) {
+        if (telemetriesBuilder_ == null) {
+          ensureTelemetriesIsMutable();
+          telemetries_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          telemetriesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Builder addAllTelemetries(
+          java.lang.Iterable<? extends Definitions.Telemetry> values) {
+        if (telemetriesBuilder_ == null) {
+          ensureTelemetriesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, telemetries_);
+          onChanged();
+        } else {
+          telemetriesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Builder clearTelemetries() {
+        if (telemetriesBuilder_ == null) {
+          telemetries_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          telemetriesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Builder removeTelemetries(int index) {
+        if (telemetriesBuilder_ == null) {
+          ensureTelemetriesIsMutable();
+          telemetries_.remove(index);
+          onChanged();
+        } else {
+          telemetriesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Definitions.Telemetry.Builder getTelemetriesBuilder(
+          int index) {
+        return getTelemetriesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Definitions.TelemetryOrBuilder getTelemetriesOrBuilder(
+          int index) {
+        if (telemetriesBuilder_ == null) {
+          return telemetries_.get(index);  } else {
+          return telemetriesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public java.util.List<? extends Definitions.TelemetryOrBuilder> 
+           getTelemetriesOrBuilderList() {
+        if (telemetriesBuilder_ != null) {
+          return telemetriesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(telemetries_);
+        }
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Definitions.Telemetry.Builder addTelemetriesBuilder() {
+        return getTelemetriesFieldBuilder().addBuilder(
+            Definitions.Telemetry.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public Definitions.Telemetry.Builder addTelemetriesBuilder(
+          int index) {
+        return getTelemetriesFieldBuilder().addBuilder(
+            index, Definitions.Telemetry.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Telemetry telemetries = 1;</code>
+       */
+      public java.util.List<Definitions.Telemetry.Builder> 
+           getTelemetriesBuilderList() {
+        return getTelemetriesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          Definitions.Telemetry, Definitions.Telemetry.Builder, Definitions.TelemetryOrBuilder> 
+          getTelemetriesFieldBuilder() {
+        if (telemetriesBuilder_ == null) {
+          telemetriesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              Definitions.Telemetry, Definitions.Telemetry.Builder, Definitions.TelemetryOrBuilder>(
+                  telemetries_,
+                  ((bitField0_ & 0x00000001) != 0),
+                  getParentForChildren(),
+                  isClean());
+          telemetries_ = null;
+        }
+        return telemetriesBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ListOfTelemetry)
+    }
+
+    // @@protoc_insertion_point(class_scope:ListOfTelemetry)
+    private static final Definitions.ListOfTelemetry DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new Definitions.ListOfTelemetry();
+    }
+
+    public static Definitions.ListOfTelemetry getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ListOfTelemetry>
+        PARSER = new com.google.protobuf.AbstractParser<ListOfTelemetry>() {
+      @java.lang.Override
+      public ListOfTelemetry parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ListOfTelemetry(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ListOfTelemetry> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ListOfTelemetry> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public Definitions.ListOfTelemetry getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3704,6 +4647,11 @@ public final class Definitions {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Telemetry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ListOfTelemetry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ListOfTelemetry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Null_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -3719,13 +4667,16 @@ public final class Definitions {
     java.lang.String[] descriptorData = {
       "\n\021definitions.proto\"\034\n\005Water\022\023\n\013appartem" +
       "ent\030\001 \001(\t\"\035\n\013Electricity\022\016\n\006device\030\001 \001(\t" +
-      "\"\034\n\013Temperature\022\r\n\005place\030\001 \001(\t\"\247\001\n\tTelem" +
+      "\"\034\n\013Temperature\022\r\n\005place\030\001 \001(\t\"\265\001\n\tTelem" +
       "etry\022\014\n\004time\030\001 \001(\t\022\r\n\005value\030\002 \001(\002\022\016\n\006sen" +
-      "der\030\003 \001(\t\022\027\n\005water\030\004 \001(\0132\006.WaterH\000\022#\n\013el" +
-      "ectricity\030\005 \001(\0132\014.ElectricityH\000\022#\n\013tempe" +
-      "rature\030\006 \001(\0132\014.TemperatureH\000B\n\n\010detector" +
-      "\"\006\n\004Null26\n\020TelemetryService\022\"\n\rsendTele" +
-      "metry\022\n.Telemetry\032\005.Nullb\006proto3"
+      "der\030\003 \001(\t\022\014\n\004unit\030\004 \001(\t\022\027\n\005water\030\005 \001(\0132\006" +
+      ".WaterH\000\022#\n\013electricity\030\006 \001(\0132\014.Electric" +
+      "ityH\000\022#\n\013temperature\030\007 \001(\0132\014.Temperature" +
+      "H\000B\n\n\010detector\"2\n\017ListOfTelemetry\022\037\n\013tel" +
+      "emetries\030\001 \003(\0132\n.Telemetry\"\006\n\004Null2b\n\020Te" +
+      "lemetryService\022\"\n\rsendTelemetry\022\n.Teleme" +
+      "try\032\005.Null\022*\n\017sendTelemetries\022\020.ListOfTe" +
+      "lemetry\032\005.Nullb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3754,9 +4705,15 @@ public final class Definitions {
     internal_static_Telemetry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Telemetry_descriptor,
-        new java.lang.String[] { "Time", "Value", "Sender", "Water", "Electricity", "Temperature", "Detector", });
-    internal_static_Null_descriptor =
+        new java.lang.String[] { "Time", "Value", "Sender", "Unit", "Water", "Electricity", "Temperature", "Detector", });
+    internal_static_ListOfTelemetry_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_ListOfTelemetry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ListOfTelemetry_descriptor,
+        new java.lang.String[] { "Telemetries", });
+    internal_static_Null_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_Null_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Null_descriptor,

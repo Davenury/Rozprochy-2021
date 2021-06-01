@@ -1,4 +1,5 @@
 package sr;
+import sr.Definitions;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
@@ -43,6 +44,37 @@ public final class TelemetryServiceGrpc {
       }
     }
     return getSendTelemetryMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<Definitions.ListOfTelemetry,
+      Definitions.Null> getSendTelemetriesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "sendTelemetries",
+      requestType = Definitions.ListOfTelemetry.class,
+      responseType = Definitions.Null.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<Definitions.ListOfTelemetry,
+      Definitions.Null> getSendTelemetriesMethod() {
+    io.grpc.MethodDescriptor<Definitions.ListOfTelemetry, Definitions.Null> getSendTelemetriesMethod;
+    if ((getSendTelemetriesMethod = TelemetryServiceGrpc.getSendTelemetriesMethod) == null) {
+      synchronized (TelemetryServiceGrpc.class) {
+        if ((getSendTelemetriesMethod = TelemetryServiceGrpc.getSendTelemetriesMethod) == null) {
+          TelemetryServiceGrpc.getSendTelemetriesMethod = getSendTelemetriesMethod =
+              io.grpc.MethodDescriptor.<Definitions.ListOfTelemetry, Definitions.Null>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "sendTelemetries"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  Definitions.ListOfTelemetry.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  Definitions.Null.getDefaultInstance()))
+              .setSchemaDescriptor(new TelemetryServiceMethodDescriptorSupplier("sendTelemetries"))
+              .build();
+        }
+      }
+    }
+    return getSendTelemetriesMethod;
   }
 
   /**
@@ -100,6 +132,13 @@ public final class TelemetryServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSendTelemetryMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void sendTelemetries(Definitions.ListOfTelemetry request,
+        io.grpc.stub.StreamObserver<Definitions.Null> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSendTelemetriesMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -109,6 +148,13 @@ public final class TelemetryServiceGrpc {
                 Definitions.Telemetry,
                 Definitions.Null>(
                   this, METHODID_SEND_TELEMETRY)))
+          .addMethod(
+            getSendTelemetriesMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                Definitions.ListOfTelemetry,
+                Definitions.Null>(
+                  this, METHODID_SEND_TELEMETRIES)))
           .build();
     }
   }
@@ -134,6 +180,14 @@ public final class TelemetryServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSendTelemetryMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void sendTelemetries(Definitions.ListOfTelemetry request,
+        io.grpc.stub.StreamObserver<Definitions.Null> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getSendTelemetriesMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -155,6 +209,13 @@ public final class TelemetryServiceGrpc {
     public Definitions.Null sendTelemetry(Definitions.Telemetry request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSendTelemetryMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public Definitions.Null sendTelemetries(Definitions.ListOfTelemetry request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSendTelemetriesMethod(), getCallOptions(), request);
     }
   }
 
@@ -179,9 +240,18 @@ public final class TelemetryServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSendTelemetryMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<Definitions.Null> sendTelemetries(
+        Definitions.ListOfTelemetry request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSendTelemetriesMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SEND_TELEMETRY = 0;
+  private static final int METHODID_SEND_TELEMETRIES = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -202,6 +272,10 @@ public final class TelemetryServiceGrpc {
       switch (methodId) {
         case METHODID_SEND_TELEMETRY:
           serviceImpl.sendTelemetry((Definitions.Telemetry) request,
+              (io.grpc.stub.StreamObserver<Definitions.Null>) responseObserver);
+          break;
+        case METHODID_SEND_TELEMETRIES:
+          serviceImpl.sendTelemetries((Definitions.ListOfTelemetry) request,
               (io.grpc.stub.StreamObserver<Definitions.Null>) responseObserver);
           break;
         default:
@@ -266,6 +340,7 @@ public final class TelemetryServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new TelemetryServiceFileDescriptorSupplier())
               .addMethod(getSendTelemetryMethod())
+              .addMethod(getSendTelemetriesMethod())
               .build();
         }
       }
