@@ -1,66 +1,39 @@
 package sr.grpc.client;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import sr.Definitions;
-import sr.TelemetryServiceGrpc;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Locale;
+
+import static java.lang.Integer.parseInt;
 
 public class Client {
-    public static void main(String[] args){
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8080)
-                .usePlaintext()
-                .build();
+    private static String clientName;
+    private static Sender sender;
+    private static int maxTelemetryBuffor;
 
-        TelemetryServiceGrpc.TelemetryServiceBlockingStub stub =
-                TelemetryServiceGrpc.newBlockingStub(channel);
+    private static void sendRandomTelemetry(Definitions.Telemetry.DetectorCase detectorCase){
+        sender.sendTelemetry(TelemetryInfo.randomTelemetry(clientName, detectorCase).build());
+    }
 
-        stub.sendTelemetry(Definitions.Telemetry.newBuilder()
-            .setSender("Client1")
-            .setTime(new Timestamp(new Date().getTime()).toString())
-            .setValue(50)
-            .setElectricity(Definitions.Electricity.newBuilder()
-                    .setDevice("Radio")
-                    .build())
-            .build()
-        );
-        System.out.println("Sent electricity");
+    public static void main(String[] args) throws IOException {
+        clientName = args[0];
+        maxTelemetryBuffor = parseInt(args[1]);
+        int scheduleTime = parseInt(args[2]);
+        sender = new Sender(maxTelemetryBuffor, scheduleTime);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        stub.sendTelemetry(Definitions.Telemetry.newBuilder()
-                .setSender("Client1")
-                .setTime(new Timestamp(new Date().getTime()).toString())
-                .setValue(50)
-                .setWater(Definitions.Water.newBuilder()
-                        .setAppartement("My appartement")
-                        .build())
-                .build()
-        );
-        System.out.println("Sent water");
-
-        stub.sendTelemetry(Definitions.Telemetry.newBuilder()
-                .setSender("Client1")
-                .setTime(new Timestamp(new Date().getTime()).toString())
-                .setValue(50)
-                .setTemperature(Definitions.Temperature.newBuilder()
-                        .setPlace("My place")
-                        .build())
-                .build()
-        );
-
-        Definitions.Telemetry telemetry = Definitions.Telemetry.newBuilder()
-                .setSender("Client1")
-                .setTime(new Timestamp(new Date().getTime()).toString())
-                .setValue(50)
-                .setTemperature(Definitions.Temperature.newBuilder()
-                        .setPlace("My place")
-                        .build())
-                .build();
-
-        stub.sendTelemetries(Definitions.ListOfTelemetry.newBuilder()
-                .addTelemetries(telemetry)
-                .build());
-        System.out.println("Send temperature");
+        while(true){
+            System.out.println(clientName + " $> ");
+            String telemetryType = reader.readLine();
+            switch (telemetryType.toLowerCase()) {
+                case "e" -> sendRandomTelemetry(Definitions.Telemetry.DetectorCase.ELECTRICITY);
+                case "w" -> sendRandomTelemetry(Definitions.Telemetry.DetectorCase.WATER);
+                case "t" -> sendRandomTelemetry(Definitions.Telemetry.DetectorCase.TEMPERATURE);
+                default -> System.out.println("Wrong letter. \nTry: \ne for sending electricity \nw for sending water \nt for sending temperature.");
+            }
+        }
     }
 }

@@ -25,8 +25,13 @@ message Telemetry{
   }
 }
 
+message ListOfTelemetry {
+  repeated Telemetry telemetries = 1;
+}
+
 message Null{}
 
 service TelemetryService{
   rpc sendTelemetry (Telemetry) returns (Null);
+  rpc sendTelemetries (ListOfTelemetry) returns (Null);
 }

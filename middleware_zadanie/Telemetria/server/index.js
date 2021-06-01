@@ -11,7 +11,8 @@ const protoDescriptor = grpc.loadPackageDefinition(protoDefinition)
 
 const server = new grpc.Server()
 server.addService(protoDescriptor.TelemetryService.service, {
-        sendTelemetry: sendTelemetry
+        sendTelemetry: sendTelemetry,
+        sendTelemetries: sendTelemetries
     }
 )
 
@@ -25,4 +26,12 @@ function handleTelemetry(telemetry) {
 }
 function sendTelemetry(call, callback){
     callback(null, handleTelemetry(call.request))
+}
+
+function handleSendTelemetries(request){
+    request.telemetries.forEach(telemetry => console.log(telemetry))
+    return protoDescriptor.Null
+}
+function sendTelemetries(call, callback){
+    callback(null, handleSendTelemetries(call.request))
 }
