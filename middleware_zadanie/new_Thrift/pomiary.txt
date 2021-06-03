@@ -1,0 +1,23 @@
+JAVA - JSON
+One skill person: 0.397
+Many skill person: 1.167
+Process one application: 0.226
+Process many applications: 9.169
+Application one skills: 0.104
+Application many skills: 0.887
+
+JAVA - BINARY
+One skill person: 0.503
+Many skill person: 0.995
+Process one application: 0.375
+Process many applications: 3.952
+Application one skills: 0.151
+Application many skills: 0.622
+
+JAVA - COMPACT
+One skill person: 0.503
+Many skill person: 0.703
+Process one application: 0.272
+Process many applications: 2.741
+Application one skills: 0.167
+Application many skills: 0.849
